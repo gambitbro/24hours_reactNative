@@ -45,7 +45,7 @@ export default function HomeScreen() {
       <TextInput
         style={{
           height: 40,
-          borderColor: 'cobalt',
+          borderColor: 'red',
           borderWidth: 1,
         }}
         defaultValue="Name Me!"
