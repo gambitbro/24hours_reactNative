@@ -1,60 +1,49 @@
-import { Image, StyleSheet, Platform, Text, TextInput, View } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
+import { Image, Button, StyleSheet, Platform, Text, TextInput, View } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 
-const getFullName = (
-  firstName: string,
-  secondName: string,
-  thirdName: string,
-  fourthName: string,
-) => {
-  return firstName + ' ' + secondName + ' ' + thirdName + ' ' + fourthName;
+
+type CatProps = {
+  name: string;
 };
 
-export default function HomeScreen() {
+const Cat = (props: CatProps) => {
+  const [isHungry, setIsHungry] = useState(true);
+
   return (
-    <ParallaxScrollView 
-    headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47'}}
-    headerImage={
-      <Image
-          source={require('@/assets/images/20180608_041342.png')}
-          style={styles.reactLogo}
-      />
-    }>
-
-    <ThemedView style={styles.titleContainer}>
-      <ThemedText type="title">{getFullName('24', 'YOU', 'CAN', 'FIND')}</ThemedText>  
-    </ThemedView>
-    
-    <ThemedView style={styles.stepContainer}>
-      <ThemedText type="title">[Nearby]</ThemedText>  
-    </ThemedView>
-
-    <ThemedView style={styles.stepContainer}>
-      <ThemedText type="title">[EXIT1]</ThemedText>  
-    </ThemedView>
-
-    <ThemedView style={styles.stepContainer}>
-      <ThemedText type="title">[EXIT2]</ThemedText>  
-    </ThemedView>
-
     <View>
-      <Text>Hello, I am...</Text>
-      <TextInput
-        style={{
-          height: 40,
-          borderColor: 'red',
-          borderWidth: 1,
+      <Text>
+        I am {props.name}, and I am {isHungry ? 'hungry' : 'full'}!
+      </Text>
+      <Button
+        onPress={() => {
+          setIsHungry(false);
         }}
-        defaultValue="Name Me!"
+        disabled={!isHungry}
+        title={isHungry ? 'Give me some food, please!' : 'Thank you!'}
       />
     </View>
+  );
+};
 
+const Cafe = () => {
+  return (
+    <ParallaxScrollView
+      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47'}}
+      headerImage={
+        <Image
+            source={require('@/assets/images/20180608_041342.png')}
+            style={styles.reactLogo}
+        />
+      }
+    >
+      <Cat name="Munkustrap" />
+      <Cat name="Spot" />
     </ParallaxScrollView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   titleContainer: {
@@ -74,3 +63,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 });
+
+
+export default Cafe;
