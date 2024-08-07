@@ -1,68 +1,53 @@
-import React, {useState} from 'react';
-import { Image, Button, StyleSheet, Platform, Text, TextInput, View } from 'react-native';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
+import React, {Component} from 'react';
+import {
+    Alert,
+    Platform,
+    Button, 
+    StyleSheet,
+    Text,
+    TouchableHighlight,
+    TouchableOpacity,
+    TouchableNativeFeedback,
+    TouchableWithoutFeedback, 
+    View,
+} from 'react-native';
 
+export default class Touchables extends Component {
+    _onPressButton() {
+        Alert.alert('You tapped the button!');
+    }
 
-type CatProps = {
-  name: string;
-};
+    _onLongPressButton() {
+        Alert.alert('You long-pressed the button!');
+    }
 
-const Cat = (props: CatProps) => {
-  const [isHungry, setIsHungry] = useState(true);
-
-  return (
-    <View>
-      <Text>
-        I am {props.name}, and I am {isHungry ? 'hungry' : 'full'}!
-      </Text>
-      <Button
-        onPress={() => {
-          setIsHungry(false);
-        }}
-        disabled={!isHungry}
-        title={isHungry ? 'Give me some food, please!' : 'Thank you!'}
-      />
-    </View>
-  );
-};
-
-const Cafe = () => {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47'}}
-      headerImage={
-        <Image
-            source={require('@/assets/images/20180608_041342.png')}
-            style={styles.reactLogo}
-        />
-      }
-    >
-      <Cat name="Munkustrap" />
-      <Cat name="Spot" />
-    </ParallaxScrollView>
-  );
-};
+    render() {
+        return (
+            <View style={styles.container}>
+                <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
+                    <View style={styles.button}>
+                        
+                    </View>
+                </TouchableHighlight>
+            </View>
+        );
+    }
+}
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 250,
-    width: 380,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
+    container: {
+        paddingTop: 60,
+        alignItems: 'center',
+    },
+    button: {
+        marginBottom: 30,
+        width: 260,
+        alignItems: 'center',
+        backgroundColor: '#2196F3',
+    },
+    buttonText: {
+        textAlign: 'center',
+        padding: 20,
+        color: 'white',
+    },
 });
-
-
-export default Cafe;
