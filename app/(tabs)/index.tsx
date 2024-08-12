@@ -17,7 +17,7 @@ export default class Touchables extends Component {
         Alert.alert('You tapped the button!');
     }
 
-    _onLongPressButton() {
+    _onLongPressButton() { 
         Alert.alert('You long-pressed the button!');
     }
 
