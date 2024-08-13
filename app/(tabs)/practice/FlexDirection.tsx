@@ -40,7 +40,7 @@ const PreviewLayout = ({
                 <TouchableOpacity
                     key={value}
                     onPress={() => setSelectedValue(value)}
-                    style={[styles.button, selectedValue === value && styles.seleced]}
+                    style={[styles.button, selectedValue === value && styles.selected]}
                 >
                     <Text 
                         style={[
